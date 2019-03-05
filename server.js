@@ -25,8 +25,10 @@ app.use(cors(corsOptions));
 // Use Routes
 const authController = require('./controllers/authController');
 const postController = require('./controllers/postController');
+const profileController = require('./controllers/profileController');
 app.use('/auth', authController);
-app.use('/api/v1/post', postController);
+app.use('/api/v1/posts', postController);
+app.use('/api/v1/profile', profileController);
 
 
 

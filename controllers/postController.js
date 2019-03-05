@@ -67,4 +67,21 @@ router.get('/userPost', async(req, res) =>{
   }
 })
 
+router.get('/allPost', async(req, res) =>{
+  try {
+    const findPosts = await Post.find();
+    console.log(findPosts, ' these are all the posts');
+
+    res.json({
+      status: 200,
+      data: findPosts
+    })
+  } catch (err) {
+    res.json({
+      status: 400,
+      data: err.message
+    })
+  }
+})
+
 module.exports = router;
