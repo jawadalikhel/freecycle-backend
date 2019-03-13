@@ -13,7 +13,9 @@ router.post('/create', async(req, res) =>{
       userEntry.title = req.body.title;
       userEntry.picture = req.body.picture;
       userEntry.description = req.body.description;
+      userEntry.price = req.body.price;
       userEntry.location = req.body.location;
+      userEntry.createdAt = req.body.createdAt;
 
       console.log(userEntry, '<--- this is userEntry');
 
@@ -23,7 +25,8 @@ router.post('/create', async(req, res) =>{
 
       res.json({
         status: 200,
-        data: createPost
+        data: createPost,
+        created: 'post created successful'
       })
 
     }else {
@@ -83,5 +86,24 @@ router.get('/allPost', async(req, res) =>{
     })
   }
 })
+
+router.get('/:id', async(req, res) =>{
+  try {
+    const deletePost = await Post.findByIdAndRemove(req.params.id);
+    console.log(deletePost, 'this is the delete post');
+
+    res.json({
+      status: 200,
+      data: deletePost
+    })
+
+  } catch (err) {
+    res.json({
+      status: 400,
+      data: err.message
+    })
+  }
+})
+
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/freecycle00', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/freecycle01', { useNewUrlParser: true });
 
 mongoose.connection.on('connected', () =>{
   console.log('Mongoose is connected')
