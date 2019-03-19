@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/auth');
 const Post = require('../models/post');
+const Wanted = require('../models/wanted');
+const Jobs = require('../models/job');
+
 
 router.post('/create', async(req, res) =>{
   try {
     if(req.session.logged){
       console.log(req.session, '<--- this is req.session')
-
       const userEntry = {};
       userEntry.createdBy = req.session.username;
       userEntry.title = req.body.title;
@@ -16,7 +18,9 @@ router.post('/create', async(req, res) =>{
       userEntry.price = req.body.price;
       userEntry.location = req.body.location;
       userEntry.createdAt = req.body.createdAt;
+      userEntry.category = req.body.category;
 
+      console.log('the data is save in ', userEntry.category)
       console.log(userEntry, '<--- this is userEntry');
 
       const createPost = await Post.create(userEntry);
@@ -28,18 +32,17 @@ router.post('/create', async(req, res) =>{
         data: createPost,
         created: 'post created successful'
       })
-
-    }else {
+    }
+    else {
       res.json({
         status: 200,
         data: 'login required'
       })
     }
-
   } catch (err) {
     res.json({
       status: 400,
-      data: err.message
+      data: err
     })
   }
 })
