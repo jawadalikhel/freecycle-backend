@@ -7,6 +7,7 @@ const PostSchema = new mongoose.Schema({
   description: String,
   price: String,
   location: String,
+  Eventdata: String,
   createdBy: String,
   createdAt: {type: Date, default: Date.now}
 })

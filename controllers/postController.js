@@ -17,6 +17,7 @@ router.post('/create', async(req, res) =>{
       userEntry.description = req.body.description;
       userEntry.price = req.body.price;
       userEntry.location = req.body.location;
+      userEntry.Eventdata = req.body.Eventdata;
       userEntry.createdAt = req.body.createdAt;
       userEntry.category = req.body.category;
 
@@ -92,12 +93,12 @@ router.get('/allPost', async(req, res) =>{
 
 router.get('/:id', async(req, res) =>{
   try {
-    const deletePost = await Post.findByIdAndRemove(req.params.id);
-    console.log(deletePost, 'this is the delete post');
+    const findPost = await Post.findById(req.params.id);
+    console.log(findPost, 'this is the delete post');
 
     res.json({
       status: 200,
-      data: deletePost
+      data: findPost
     })
 
   } catch (err) {
